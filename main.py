@@ -1,34 +1,45 @@
-import random
 import sys
+from random import randint
 
-from PyQt5.QtCore import Qt
-from PyQt5.QtGui import QPainter, QBrush, QColor, QPainterPath
-from PyQt5.QtWidgets import QWidget, QApplication, QLabel
+from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5.QtGui import QPainter, QColor
+from PyQt5 import uic
 
 
-class Example(QWidget):
+SCREEN_SIZE = (600, 650)
+
+
+class Example(QtWidgets.QMainWindow):
     def __init__(self):
         super().__init__()
-        self.setGeometry(300, 300, 300, 300)
-        self.setWindowTitle('Координаты')
-        self.qp = QPainter()
-        self.flag = False
-        self.coords = []
-        self.push
+        uic.loadUi("ui.ui", self)
+        self.resize(*SCREEN_SIZE)
+        self.initUi()
 
-    def drawf(self):
+    def initUi(self):
+        self.flag = False
+        self.pushButton.clicked.connect(self.draw)
+
+    def draw(self):
         self.flag = True
         self.update()
 
     def paintEvent(self, event):
         if self.flag:
-            self.qp = QPainter()
-            self.qp.begin(self)
-            self.draw()
-            self.qp.end()
+            qp = QPainter()
+            qp.begin(self)
+            qp.setPen(QColor(250, 255, 0))
+            x, y, w, h = randint(0, SCREEN_SIZE[0]),\
+                         randint(0, SCREEN_SIZE[1]),\
+                         randint(10, 70),\
+                         randint(10, 70)
+            qp.drawEllipse(x, y, w, h)
+            qp.end()
+            self.flag = False
 
-    def draw(self):
-        self.qp.setBrush(
-            QColor(random.randint(0, 255), random.randint(0, 255), random.randint(0, 255)))
 
-        self.qp.drawEllipse(x, y, random_int, random_int)
+if __name__ == '__main__':
+    app = QtWidgets.QApplication(sys.argv)
+    ex = Example()
+    ex.show()
+    sys.exit(app.exec())
