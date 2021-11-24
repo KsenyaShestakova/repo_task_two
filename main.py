@@ -28,7 +28,7 @@ class Example(QtWidgets.QMainWindow):
         if self.flag:
             qp = QPainter()
             qp.begin(self)
-            qp.setPen(QColor(250, 255, 0))
+            qp.setBrash(QColor(250, 255, 0))
             x, y, w, h = randint(0, SCREEN_SIZE[0]),\
                          randint(0, SCREEN_SIZE[1]),\
                          randint(10, 70),\
