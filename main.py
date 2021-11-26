@@ -12,7 +12,7 @@ SCREEN_SIZE = (600, 650)
 class Example(QtWidgets.QMainWindow):
     def __init__(self):
         super().__init__()
-        uic.loadUi("ui.ui", self)
+        uic.loadUi("Ui.ui", self)
         self.resize(*SCREEN_SIZE)
         self.initUi()
 
@@ -28,7 +28,7 @@ class Example(QtWidgets.QMainWindow):
         if self.flag:
             qp = QPainter()
             qp.begin(self)
-            qp.setBrash(QColor(250, 255, 0))
+            qp.setBrush(QColor(250, 255, 0))
             x, y, w, h = randint(0, SCREEN_SIZE[0]),\
                          randint(0, SCREEN_SIZE[1]),\
                          randint(10, 70),\
